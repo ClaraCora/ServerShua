@@ -50,7 +50,7 @@ while true; do
     if check_time; then
         # 使用 curl 下载，将文件直接丢弃到 /dev/null (-o)，并静默输出 (-s)
         # 跟随重定向 (-L)，只获取下载的真实字节数 (-w "%{size_download}")
-        bytes=$(curl -s -L -o /dev/null -w "%{size_download}" "$DOWNLOAD_URL")
+        bytes=$(curl -s -L --max-time 7200 -o /dev/null -w "%{size_download}" "$DOWNLOAD_URL")
         
         # 如果下载成功（获取到的字节数大于 0）
         if [ -n "$bytes" ] && [ "$bytes" -gt 0 ]; then
