@@ -1,0 +1,16 @@
+# shua.service
+[Unit]
+Description=VPS Traffic Consumption Worker (Shua)
+After=network.target
+
+[Service]
+Type=simple
+# 强制使用 bash 执行我们的干活脚本
+ExecStart=/bin/bash /opt/shua/worker.sh
+# 遇到错误或被杀进程时自动重启
+Restart=always
+# 重启前等待 10 秒
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
